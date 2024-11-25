@@ -1,0 +1,134 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #tab {
+            margin: 20px auto;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <h1>New Dealer</h1>
+        <table>
+            <tr>
+                <th>Sl.no</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>District</th>
+                <th>Place</th>
+                <th>Proof</th>
+                <th>Action</th>
+            </tr>
+            {% for i in New %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.dealer_name}}</td>
+                <td><img src="{{i.dealer_photo.url}}" alt="Dealer Photo"></td>
+                <td>{{i.dealer_contact}}</td>
+                <td>{{i.dealer_email}}</td>
+                <td>{{i.dealer_address}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td><a href="{{i.dealer_proof.url}}" download>View</a></td>
+                <td><a href="{% url 'Webadmin:acceptdealer' i.id %}">Accept</a> | <a href="{% url 'Webadmin:rejectdealer' i.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h1>Accepted Dealer</h1>
+        <table border="1" align="center">
+                <tr>
+                    <td>Sl.no</td>
+                    <td>Name</td>
+                    <td>Photo</td>
+                    <td>Contact</td>
+                    <td>Email</td>
+                    <td>Address</td>
+                    <td>District</td>
+                    <td>Place</td>
+                    <td>Proof</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in accepted %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.dealer_name}}</td>
+                    <td><img src="{{i.dealer_photo.url}}" width="150" height="150" ></td>
+                    <td>{{i.dealer_contact}}</td>
+                    <td>{{i.dealer_email}}</td>
+                    <td>{{i.dealer_address}}</td>
+                    <td>{{i.place.district.district_name}}</td>
+                    <td>{{i.place.place_name}}</td>
+                    <td><a href="{{i.dealer_proof.url}}" download>View</a></td>
+                    <td> <a href="{% url 'Webadmin:rejectdealer' i.id %}">Reject</a></td>
+                </tr>
+                {% endfor %}
+            <br>
+        </table>
+        <h1>Rejected Dealer</h1>
+        <table border="1" align="center">
+            <tr>
+                <td>Sl.no</td>
+                <td>Name</td>
+                <td>Photo</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Proof</td>
+                <td>Action</td>
+            </tr>
+            {% for i in rejected %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.dealer_name}}</td>
+                <td><img src="{{i.dealer_photo.url}}" width="150" height="150" ></td>
+                <td>{{i.dealer_contact}}</td>
+                <td>{{i.dealer_email}}</td>
+                <td>{{i.dealer_address}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td><a href="{{i.dealer_proof.url}}" download>View</a></td>
+                <td><a href="{% url 'Webadmin:acceptdealer' i.id %}">Accept</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

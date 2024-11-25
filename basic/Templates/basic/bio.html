@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+       <table >
+        <td colspan="2" align ="center"></td>
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname"><br><br>
+        <tr>
+
+        <label for="gender">Gender;</label>
+        <input type="radio" id="male" name="female" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="female">
+        <label for="female">Female</label><br><br></tr>
+
+        <tr><label for="marital">Marital;</label>
+        <input type="radio" id="single" name="marital" value="single">
+        <label for="single">Single</label>
+        <input type="radio" id="married" name="marital">
+        <label for="married">Married</label><br><br></tr>
+
+        <label for="department">Department:</label>
+        <select id="department"name="department">
+            <option value="sales">Sales</option>
+            <option value="marketing">Marketing</option>
+            <option value="finance">Finance</option>
+            <option value="computer">Computer</option>
+            <option value="administration">Administration</option>
+
+            <tr><label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary"><br><br></tr>
+        <tr><input type="submit" value="submit">
+        <input type="reset" value="Cancel" name="cancel"></td>
+       </table> 
+    </form>
+    Name={{name}}<br>
+    gender={{Gender}}<br>
+    Marital={{Marital}}<br>
+    Department={{Department}}<br>
+    Salary={{Salary}}<br>
+    TA={{TA}}<br>
+    DA={{DA}}<br>
+    HRA={{HRA}}<br>
+    LIC={{LIC}}<br>
+    PF={{PF}}<br>
+    Netamound={{Netamound}}
+    deduction={{deduction}}
+    
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TowingAgent Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        #tab {
+            margin-top: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .actions {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <h1 align="center">New Towing Agents</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sl.no</th>
+                    <th>Name</th>
+                    <th>Photo</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Proof</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in New %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.agent_name}}</td>
+                    <td><img src="{{i.agent_photo.url}}" alt="Agent Photo"></td>
+                    <td>{{i.agent_contact}}</td>
+                    <td>{{i.agent_email}}</td>
+                    <td>{{i.agent_address}}</td>
+                    <td>{{i.place.district.district_name}}</td>
+                    <td>{{i.place.place_name}}</td>
+                    <td><a href="{{i.agent_proof.url}}" download>View</a></td>
+                    <td class="actions">
+                        <a href="{% url 'Webadmin:acceptagent' i.id %}">Accept</a>|
+                        <a href="{% url 'Webadmin:rejectagent' i.id %}">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h1 align="center">Accepted Towing Agents</h1>
+        <table border="1" align="center">
+            <tr>
+                <td>Sl.no</td>
+                <td>Name</td>
+                <td>Photo</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Proof</td>
+                <td>Action</td>
+            </tr>
+            {% for i in accepted %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.agent_name}}</td>
+                <td><img src="{{i.agent_photo.url}}" width="150" height="150" ></td>
+                <td>{{i.agent_contact}}</td>
+                <td>{{i.agent_email}}</td>
+                <td>{{i.agent_address}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td><a href="{{i.agent_proof.url}}" download>View</a></td>
+                <td> <a href="{% url 'Webadmin:rejectagent' i.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h1 align="center">Rejected Towing Agents</h1>
+        <table border="1" align="center">
+            <tr>
+                <td>Sl.no</td>
+                <td>Name</td>
+                <td>Photo</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Proof</td>
+                <td>Action</td>
+            </tr>
+            {% for i in rejected %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.agent_name}}</td>
+                <td><img src="{{i.agent_photo.url}}" width="150" height="150" ></td>
+                <td>{{i.agent_contact}}</td>
+                <td>{{i.agent_email}}</td>
+                <td>{{i.agent_address}}</td>
+                <td>{{i.place.district.district_name}}</td>
+                <td>{{i.place.place_name}}</td>
+                <td><a href="{{i.agent_proof.url}}" download>View</a></td>
+                <td><a href="{% url 'Webadmin:acceptagent' i.id %}">Accept</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

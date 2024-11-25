@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>FuelUp</title>
+        <link rel="stylesheet" href="{% static 'logint/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'logint/css/main.css' %}" media="screen" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'logint/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'logint/css/style-portfolio.css' %}">
+        <link rel="stylesheet" href="{% static 'logint/css/picto-foundry-food.css' %}" />
+        <link rel="stylesheet" href="{% static 'logint/css/jquery-ui.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'logint/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'form.css' %}" rel="stylesheet">
+        <link rel="icon" href="favicon-1.ico" type="image/x-icon">
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Fuel Tow</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav main-nav  clear navbar-right ">
+                            <li><a class="navactive color_animation" href="{% url 'webagent:Home' %}">Home</a></li>
+                            <li><a class="color_animation" href="{% url 'webagent:MyProfile' %}">Profile</a></li>
+                            <li><a class="color_animation" href="{% url 'webagent:Editprofile' %}">Edit Profile</a></li>
+                            <li><a class="color_animation" href="{% url 'webagent:Changepassword' %}">Change Password</a></li>
+                            <li><a class="color_animation" href="{% url 'webagent:Vehicle' %}">Vehicle</a></li>
+                            <li><a class="color_animation" href="{% url 'webagent:UserBooking' %}">Booking</a></li>
+                            <li><a class="color_animation" href="{% url 'webagent:Logout' %}">Logout</a></li>
+                           
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+
+    {% block content %}
+
+    {% endblock content %}
+
+     <!-- ============ Footer Section  ============= -->
+
+     <footer class="sub_footer">
+        <div class="container">
+            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; Fuel Tow 2014, Theme by <a href="https://themewagon.com/">ThemeWagon</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p>
+            </div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+        </div>
+    </footer>
+
+
+    <script type="text/javascript" src="{% static 'logint/js/jquery-1.10.2.min.j' %}s"> </script>
+    <script type="text/javascript" src="{% static 'logint/js/bootstrap.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'logint/js/jquery-1.10.2.js' %}"></script>     
+    <script type="text/javascript" src="{% static 'logint/js/jquery.mixitup.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'logint/js/main.js' %}" ></script>
+
+    <script src="{% static 'logint/js/main.js' %}"></script>.
+</body>
+</html>

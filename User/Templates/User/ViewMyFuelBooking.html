@@ -1,0 +1,61 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fuel Booking List</title>
+</head>
+<body>
+    <div id="tab">
+
+<h2 align="center">Fuel Booking List</h2>
+
+<table border="1" align="center">
+    <thead>
+        <tr>
+            <th>Sl.no</th>
+            <th>Fuel Type</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Booking Date</th>
+            <th>Location</th>
+            <th>Address</th>
+            <th>Dealer</th>
+            <th>Dealer Address</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in fuelbookings %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ booking.fueltype.fueltype_name }}</td>
+            <td>{{ booking.fbooking_qty }}</td>
+            <td>{{ booking.fbooking_amount }}</td>
+            <td>{{ booking.fbooking_date }}</td>
+            <td>{{booking.location.place.district.district_name}}&nbsp;{{booking.location.place.place_name }}
+                <br>{{booking.location.location_name}} </td>
+            <td>{{ booking.fbooking_address }}</td>
+            <td>{{ booking.dealer.dealer_name }}</td>
+            <td>{{ booking.dealer.dealer_contact }}<br>
+                {{ booking.dealer.dealer_address }}</td>
+            <td>{% if booking.fbooking_status == '0' and booking.payment_status == '0' %}
+                Booking not Confirmed</a>
+                {% elif booking.fbooking_status == '1' and booking.payment_status == '0' %}
+                Accepted and Not Paid |<a href="{% url 'webuser:Fuelpay' booking.id  %}">Pay Now</a>
+                {% elif booking.fbooking_status == '1' and booking.payment_status == '1' %}
+                Payment Completed
+                {% else %}
+                Rejected Booking
+                {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
+<br><br><br><br><br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,102 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        #tab {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <h1>New Complaints</h1>
+        <table>
+            <tr>
+                <th>Sl.no</th>
+                <th>Title</th>
+                <th>Complaint</th>
+                <th>Date</th>
+                <th>User</th>
+                <th>Action</th>
+            </tr>
+            {% for i in new %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.complaint_title }}</td>
+                <td>{{ i.complaint_content }}</td>
+                <td>{{ i.complaint_date }}</td>
+                <td>{{ i.user.user_name }}</td>
+                <td><a href="{% url 'Webadmin:reply' i.id %}">Send Reply</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h1>Replied Complaints</h1>
+        <table>
+            <tr>
+                <th>Sl.no</th>
+                <th>Title</th>
+                <th>Complaint</th>
+                <th>Date</th>
+                <th>User</th>
+                <th>Reply</th>
+            </tr>
+            {% for i in replied %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.complaint_title }}</td>
+                <td>{{ i.complaint_content }}</td>
+                <td>{{ i.complaint_date }}</td>
+                <td>{{ i.user.user_name }}</td>
+                <td>{{ i.complaint_reply }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

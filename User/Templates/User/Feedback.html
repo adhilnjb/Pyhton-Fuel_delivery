@@ -1,0 +1,48 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en"><div id="tab"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form method="post" >
+        {% csrf_token %}
+        <table border="1" align="center">
+       
+        <tr>
+            <td>Feedback</td>
+            <td><textarea name="complaint" id="" cols="30" rows="10">{{com.feedback_content}}</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="Save" name="Save">
+            <input type="reset" value="Cancel" name="Cancel"></td>
+        </tr>
+        </table>
+    </form>
+    <table border="1" align="center">
+        <tr>
+            <td>Sl.no</td>
+            <td>Feedback</td>
+            <td>Date</td>
+            <td>Action</td>
+        </tr>
+        {% for i in Data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.feedback_content}}</td>
+            <td>{{i.feedback_date}}</td>
+            <td><a href="{% url 'webuser:DeleteFeedback' i.id %}">Delete</a>/
+                <a href="{% url 'webuser:EditFeedback' i.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

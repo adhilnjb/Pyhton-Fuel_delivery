@@ -1,0 +1,67 @@
+{% extends 'TowingAgent/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f6;
+        }
+        #tab {
+            margin-top: 50px;
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #edf6ed;
+        }
+        th {
+            background-color: #f3f3f3;
+        }
+        img {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <table>
+            <tr>
+                <th colspan="2" style="text-align: center;"><img src="{{agent.agent_photo.url}}" width="150" height="150"></th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{agent.agent_name}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{agent.agent_email}}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{agent.agent_contact}}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{agent.agent_address}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'Dealer/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><div id="tab">
+
+    <form method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{Dealer.dealer_name}}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{Dealer.dealer_email}}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="contant">Contact:</label>
+                    <input type="tel" id="contant" name="contant" value="{{Dealer.dealer_contact}}" required>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="address">Address:</label>
+                    <textarea  id="address" name="address" required>{{Dealer.dealer_address}}</textarea>
+                </td>
+            </tr>
+            
+          
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="submit" value="Submit">
+                    <input type="reset" value="Cancel" name="cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

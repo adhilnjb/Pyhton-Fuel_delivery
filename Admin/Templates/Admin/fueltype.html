@@ -1,0 +1,53 @@
+{% extends 'Admin/Head.html'  %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br>
+    <div id="tab" align="center">
+    <form method="post">
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td>fueltype</td>
+            <td><input type="text" name="txtfueltype" value="{{fueltype.fueltype_name}}"></td>
+            </tr> 
+            <td colspan="2" align="center"><input type="submit" name="submit" value="submit">
+            
+            <input type="reset" value="Cancel" name="cancel"></td> 
+    
+        </table>
+        <br><bR>
+        <table>
+            <table border="1">
+            <thead>
+                <tr>
+                    <th>si.no</th>
+                    <th>fueltype</th>
+                    <th>action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in Type %}
+                    
+                        <tr>
+                            <td> {{forloop.counter}}</td>
+                            <td>{{i.fueltype_name}}</td>
+                            <td><a href="{% url 'Webadmin:Deletefueltype' i.id %}">Delete</a>
+                                <a href="{% url 'Webadmin:updatefueltype' i.id %}"> edit</a></td> 
+                            
+                        </tr>
+                       {% endfor %}      
+</tbody>
+</table>
+    </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

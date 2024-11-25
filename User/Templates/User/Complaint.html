@@ -1,0 +1,55 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form method="post" >
+        {% csrf_token %}
+        <table border="1" align="center">
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="title" id="" value="{{com.complaint_title}}"></td>
+        </tr>
+        <tr>
+            <td>Complaint</td>
+            <td><textarea name="complaint" id="" cols="30" rows="10">{{com.complaint_content}}</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="Save" name="Save">
+            <input type="reset" value="Cancel" name="Cancel"></td>
+        </tr>
+        </table>
+    </form>
+    <table border="1" align="center">
+        <tr>
+            <td>Sl.no</td>
+            <td>Title</td>
+            <td>Complaint</td>
+            <td>Date</td>
+            <td>Reply</td>
+            <td>Action</td>
+        </tr>
+        {% for i in Data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.complaint_title}}</td>
+            <td>{{i.complaint_content}}</td>
+            <td>{{i.complaint_date}}</td>
+            <td>{{i.complaint_reply}}</td>
+            <td><a href="{% url 'webuser:DeleteComplaint' i.id %}">Delete</a>/
+                <a href="{% url 'webuser:EditComplaint' i.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

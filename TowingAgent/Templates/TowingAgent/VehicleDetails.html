@@ -1,0 +1,65 @@
+{% extends 'TowingAgent/Head.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" align="center">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1" align="Center">
+        <tr>
+            <td>Vehicle Type</td>
+            <td><select name="sel_type">
+                <option value="">Select</option>
+                {% for i in type %}
+                <option value="{{i.id}}">{{i.vehicle_type}}</option>
+                {% endfor %}
+            </select></td>
+        </tr>
+        <tr>
+            <td>Details</td>
+            <td><textarea name="details" id="" cols="30" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td><input type="file" name="photo" id=""></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="Center">
+                <input type="submit" name="save" value="Save">
+                <input type="reset" name="Cancel" value="Cancel"
+            </td>
+        </tr>
+    </table>
+    </form>
+    <table border="1" align="center">
+        <tr>
+            <td>Sl.no</td>
+            <td>Vehicle</td>
+            <td>Details</td>
+            <td>Image</td>
+            <td>Action</td>
+        </tr>
+        {% for i in vdetails %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.vtype.vehicle_type}}</td>
+            <td>{{i.vehicle_details}}</td>
+            <td><img src={{i.vehicle_image.url}} width="150" height="150"></td>
+            <td><a href="{% url 'webagent:deletevehicle' i.id  %}">Delete</a></td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
+<br><br><br><br>
+{% endblock content %}

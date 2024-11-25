@@ -1,0 +1,55 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agent Booking List</title>
+</head>
+<body>
+    <div id="tab">
+
+<h2 align="center">Agent Booking List</h2>
+
+<table border="1" align="center">
+    <thead>
+        <tr>
+            <th>Sl.no</th>
+            <th>Vehicle</th>
+            <th>Booking Date</th>
+            <th>Location</th>
+            <th>Address</th>
+            <th>Agent</th>
+            <th>Agent Address</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in agentbookings %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+           <td>{{booking.vdetails.vtype.vehicle_type}}</td>
+            <td>{{ booking.abooking_date }}</td>
+            <td>{{booking.location.place.district.district_name}}&nbsp;{{booking.location.place.place_name }}
+                <br>{{booking.location.location_name}} </td>
+            <td>{{ booking.abooking_address }}</td>
+            <td>{{ booking.vdetails.agent.agent_name }}</td>
+            <td>{{ booking.vdetails.agent.agent_contact }}<br>
+                {{ booking.vdetails.agent.agent_address }}</td>
+            <td>{% if booking.abooking_status == '0'  %}
+                Booking not Confirmed
+                {% elif booking.abooking_status == '1' %}
+                Accepted 
+                {% else %}
+                Rejected Booking
+                {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
+<br><br><br><br><br><br><br><br>
+{% endblock content %}

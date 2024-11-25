@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title></title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'Admin/images/favicon.png' %}">
+    <!-- Pignose Calender -->
+    <link href="{% static  'Admin/plugins/pg-calendar/css/pignose.calendar.min.css'%}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="{% static  'Admin/plugins/chartist/css/chartist.min.css'%}">
+    <link rel="stylesheet" href="{% static  'Admin/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css'%}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static  'Admin/css/style.css'%}" rel="stylesheet">
+    <link href="{% static  'Admin/form.css'%}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo"></div>
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="{% static  'Admin/images/logo.png' %}" alt=""> </b>
+                    <span class="logo-compact"><img src="{% static  'Admin/images/logo-compact.png' %}" alt=""></span>
+                    <span class="brand-title">
+                        <img src="{% static  'Admin/images/logo-text.png' %}" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+                    
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        
+                        
+                            
+                        
+                       
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="{% static  'Admin/images/user/1.png'%}" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                      
+                                        <li><a href="{% url 'Webadmin:Logout' %}"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li>
+                        <a class="has-arrow" href="{% url 'Webadmin:Home' %}" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                        
+                    </li>
+                    <li class="mega-menu mega-menu-sm">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-map menu-icon"></i><span class="nav-text">Location</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'Webadmin:district' %}">District</a></li>
+                            <li><a href="{% url 'Webadmin:place' %}">Place</a></li>
+                            <li><a href="{% url 'Webadmin:Location' %}">Location</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-label">Datas</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-list menu-icon"></i> <span class="nav-text">Basic Datas</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'Webadmin:fueltype' %}">Fuel Type</a></li>
+                            <li><a href="{% url 'Webadmin:fuelrate' %}">Fuel Rate</a></li>
+                            <li><a href="{% url 'Webadmin:Vehicle' %}">Vehicle Type</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-check menu-icon"></i><span class="nav-text"> Verification</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'Webadmin:DealerVerify' %}">Dealer Verification</a></li>
+                            <li><a href="{% url 'Webadmin:TowingAgentVerify' %}">Towing Agent Verification</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-note menu-icon"></i> <span class="nav-text">View F&C</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'Webadmin:viewcomplaint' %}">User Complaint</a></li>
+                            <li><a href="{% url 'Webadmin:viewfeedback' %}">User Feedback</a></li>
+                           
+                        </ul>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+    
+    
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab"></a> 2018</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+
+<!--**********************************
+    Scripts
+***********************************-->
+<script src="{% static  'Admin/plugins/common/common.min.js'%}"></script>
+<script src="{% static  'Admin/js/custom.min.js'%}"></script>
+<script src="{% static  'Admin/js/settings.js'%}"></script>
+<script src="{% static  'Admin/js/gleek.js'%}"></script>
+<script src="{% static  'Admin/js/styleSwitcher.js'%}"></script>
+
+<!-- Chartjs -->
+<script src="{% static  'Admin/plugins/chart.js/Chart.bundle.min.js'%}"></script>
+<!-- Circle progress -->
+<script src="{% static  'Admin/plugins/circle-progress/circle-progress.min.js'%}"></script>
+<!-- Datamap -->
+<script src="{% static  'Admin/plugins/d3v3/index.js'%}"></script>
+<script src="{% static  'Admin/plugins/topojson/topojson.min.js'%}"></script>
+<script src="{% static  'Admin/plugins/datamaps/datamaps.world.min.js'%}"></script>
+<!-- Morrisjs -->
+<script src="{% static  'Admin/plugins/raphael/raphael.min.js'%}"></script>
+<script src="{% static  'Admin/plugins/morris/morris.min.js'%}"></script>
+<!-- Pignose Calender -->
+<script src="{% static  'Admin/plugins/moment/moment.min.js'%}"></script>
+<script src="{% static  'Admin/plugins/pg-calendar/js/pignose.calendar.min.js'%}"></script>
+<!-- ChartistJS -->
+<script src="{% static  'Admin/plugins/chartist/js/chartist.min.js'%}"></script>
+<script src="{% static  'Admin/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js'%}"></script>
+
+
+
+<script src="{% static  'Admin/js/dashboard/dashboard-1.js'%}"></script>
+
+</body>
+
+</html>

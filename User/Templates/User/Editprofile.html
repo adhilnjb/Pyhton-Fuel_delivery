@@ -1,0 +1,59 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form method="post">
+        <table border="1" align="center">
+        {% csrf_token %}
+      
+            <tr>
+                <td>
+                    <label for="name">Name</label></td><td>
+                    <input type="text" id="name" name="name" required value="{{User.user_name}}">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="email">Email</label></td><td>
+                    <input type="email" id="email" name="email" required value="{{User.user_email}}">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="contant">Contact</label></td><td>
+                    <input type="tel" id="contant" name="contant" required value="{{User.user_contact}}">
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="address">Address</label></td><td>
+                    <textarea id="address" name="address" required>{{User.user_address}}</textarea>
+                </td>
+            </tr>
+            
+          
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="submit" value="Submit">
+                    <input type="reset" value="Cancel" name="cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}
+

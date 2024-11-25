@@ -1,0 +1,116 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Data Display</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+        .data-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 23%;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .data-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .filter-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="container">
+   
+
+<form method="post" id="search"  >
+    <div class="filter-container row"  style="padding-left: 25%;">
+       
+        <div class="col-md-3">
+            <label for="district-filter">District:</label>
+            <select class="form-control" id="district-filter" onchange="searchDealer()">
+                <option value="">All District</option>
+                
+                {% for i in district %}
+                    <option value="{{ i.id }}">{{ i.district_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="place-filter">Place:</label>
+            <select class="form-control" id="place-filter" onchange="searchDealer()">
+                <option value="">All Place</option>
+                
+                {% for i in district %}
+                    <option value="{{ i.id }}">{{ i.district_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+</form>
+    <h1>Dealer Data</h1>
+
+    <div id="Result">
+    {% for dealer in dealers %}
+        <div class="data-card col-md-4">
+           <p><img src="{{dealer.dealer_photo.url}}" width="150" height="150"></p>
+            <h2>{{ dealer.dealer_name }}</h2>
+            <p>Email: {{ dealer.dealer_email }}</p>
+            <p>Contact: {{ dealer.dealer_contact }}</p>
+            <p>Address: {{ dealer.dealer_address }}</p>
+            <p>District:{{dealer.place.district.district_name}}</p>
+            <p>Place:{{dealer.place.place_name}}</p>
+            <p><a href="{% url 'webuser:fuelbooking' dealer.id  %}">Book Fuel</a></p>
+           
+        </div>
+    {% endfor %}
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district-filter").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Webadmin:Ajaxplace'  %}";
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#place-filter").html(data);
+            },
+        });
+    });
+    function searchDealer() {
+      var district = document.getElementById("district-filter").value
+      var place = document.getElementById("place-filter").value
+        var ur = "{% url 'webuser:Ajaxsearch'  %}";
+        $.ajax({
+            url: ur,
+            data: { dis:district,plc:place },
+            success: function (data) {
+                $("#Result").html(data);
+            },
+        });
+    }
+</script>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

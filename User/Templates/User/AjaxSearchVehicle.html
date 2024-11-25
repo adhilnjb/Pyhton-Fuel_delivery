@@ -1,0 +1,10 @@
+{% for i in data %}
+        <div class="data-card col-md-4">
+           <p><img src="{{i.vehicle_image.url}}" width="150" height="150"></p>
+            <h2>{{ i.vtype.vehicle_type }}</h2>
+            <p>Details: {{ i.vehicle_details }}</p>
+            <p>Agent: {{ i.agent.agent_name }}</p>
+            <p><a href="{% url 'webuser:AgentBooking' i.id   %}">Book Now</a></p>
+           
+        </div>
+    {% endfor %}

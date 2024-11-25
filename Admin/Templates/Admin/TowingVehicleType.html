@@ -1,0 +1,51 @@
+{% extends 'Admin/Head.html'  %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br>
+    <div id="tab" align="center">
+    <form method="post">
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td>Vehicle</td>
+            <td><input type="text" name="Vehicle"  value="{{seltype.vehicle_type}}"></td>
+            </tr> 
+            <td colspan="2" align="center"><input type="submit" name="submit" value="submit">
+            
+            <input type="reset" value="Cancel" name="cancel"></td> 
+    
+        </table>
+        <table>
+            <br><br>
+            <table border="1">
+            <thead>
+                <tr>
+                    <th>si.no</th>
+                    <th>vehicle</th>
+                    <th>action</th>
+                    </tr>
+                    </thead>
+                    <tbody>   
+                        {% for i in type %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.vehicle_type}}</td>
+                            <td><a href="{% url 'Webadmin:DeleteVehicle' i.id %}">Delete</a>
+                                <a href="{% url 'Webadmin:EditVehicle' i.id %}">Edit</a></td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+    </form>
+    </div>
+    
+</body>
+</html>
+{% endblock content %}

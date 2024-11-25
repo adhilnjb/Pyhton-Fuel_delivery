@@ -1,0 +1,38 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    {% csrf_token %}
+    <table border="1" align="center">
+        <tr>
+            <td colspan="2" align="center"><img src="{{User.user_photo.url}}"  width="150" height="150" style="border-radius: 50%;"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{User.user_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{User.user_email}}</td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>{{User.user_contact}}</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>{{User.user_address}}</td>
+        </tr>
+    </table>
+</body>
+</html>
+{% endblock content %}

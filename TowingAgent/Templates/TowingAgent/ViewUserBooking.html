@@ -1,0 +1,57 @@
+{% extends 'TowingAgent/Head.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Booking List</title>
+</head>
+<body>
+    <div id="tab" align="center">
+<h2 align="center">User Booking List</h2>
+
+<table border="1" align="center">
+    <thead>
+        <tr>
+            <th>Sl.no</th>
+            <th>Vehicle</th>
+            <th>Booking Date</th>
+            <th>Location</th>
+            <th>Address</th>
+            <th>User</th>
+            <th>User Address</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in agentbookings %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+           <td>{{booking.vdetails.vtype.vehicle_type}}</td>
+            <td>{{ booking.abooking_date }}</td>
+            <td>{{booking.location.place.district.district_name}}&nbsp;{{booking.location.place.place_name }}
+                <br>{{booking.location.location_name}} </td>
+            <td>{{ booking.abooking_address }}</td>
+            <td>{{ booking.user.user_name }}</td>
+            <td>{{ booking.user.user_contact }}<br>
+                {{ booking.user.user_address }}</td>
+            <td>{% if booking.abooking_status == '0'  %}
+                New Booking|<a href="{% url 'webagent:AcceptBooking' booking.id %}">Accept</a>|<br>
+                <a href="{% url 'webagent:RejectBooking' booking.id %}">Reject</a>
+                {% elif booking.abooking_status == '1'  %}
+                Accepted  |<a href="{% url 'webagent:RejectBooking' booking.id %}">Reject</a>
+              
+                {% else %}
+                Rejected Booking
+                {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</div>
+</html>
+<br><br><br><br>
+{% endblock content %}

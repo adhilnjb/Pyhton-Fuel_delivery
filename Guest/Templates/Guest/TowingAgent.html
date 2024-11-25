@@ -1,0 +1,112 @@
+{% extends 'Guest/Header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>
+                    <label for="name">Name:</label></td><td>
+                    <input required type="text" id="name" name="txt_name" title="Name Allows Only Alphabets, Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z]*$"/></td>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="email">Email:</label></td><td>
+                    <input type="email" id="email" required name="txt_email"/></td> 
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="contant">Contact:</label></td><td>
+                    <input type="text" id="contant"  required name="txt_contant" pattern="[6-9]{1}[0-9]{9}" title="phone number with 6-9 and remaing 9 digit with 0-9"/></td>            
+                
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="address">Address:</label></td><td>
+                    <textarea id="address" name="address" required></textarea>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="district">District:</label></td><td>
+                    <select id="district" name="district">
+                        <option value="">Select</option>
+                        {% for i in district %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="place">Place:</label></td><td>
+                    <select id="place" name="place">
+                        <option value="">Select</option>
+                    </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="photo">Photo:</label></td><td>
+                    <input type="file" id="photo" name="photo" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="proof">Proof:</label></td><td>
+                    <input type="file" id="proof" name="proof" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="password">Password:</label></td><td>
+                    <input type="text" id="password" pattern="(?=.*d)(?=.*[a-z])(?=.*{A-Z}).{8,}"title="Must contain at least one numbere and uppercase and lowercase letter, and at least 8 or more charater" required name="txt_password"/></td>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="submit" value="Submit">
+                    <input type="reset" value="Cancel" name="cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Webadmin:Ajaxplace'  %}";
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#place").html(data);
+            },
+        });
+    });
+</script>
+{% endblock content %}

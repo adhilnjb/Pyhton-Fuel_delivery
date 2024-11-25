@@ -1,0 +1,12 @@
+{% for agent in agents %}
+        <div class="data-card col-md-4">
+           <p><img src="{{agent.agent_photo.url}}" width="150" height="150"></p>
+            <h2>{{ agent.agent_name }}</h2>
+            <p>Email: {{ agent.agent_email }}</p>
+            <p>Contact: {{ agent.agent_contact }}</p>
+            <p>Address: {{ agent.agent_address }}</p>
+            <p>District:{{agent.place.district.district_name}}</p>
+            <p>Place:{{agent.place.place_name}}</p>
+            <p><a href="{% url 'webuser:vehicles' agent.id  %}">View vehicles</a></p>
+        </div>
+    {% endfor %}

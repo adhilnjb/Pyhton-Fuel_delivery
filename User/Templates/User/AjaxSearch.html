@@ -1,0 +1,12 @@
+{% for dealer in dealers %}
+        <div class="data-card col-md-4">
+           <p><img src="{{dealer.dealer_photo.url}}" width="150" height="150"></p>
+            <h2>{{ dealer.dealer_name }}</h2>
+            <p>Email: {{ dealer.dealer_email }}</p>
+            <p>Contact: {{ dealer.dealer_contact }}</p>
+            <p>Address: {{ dealer.dealer_address }}</p>
+            <p>District:{{dealer.place.district.district_name}}</p>
+            <p>Place:{{dealer.place.place_name}}</p>
+            <p><a href="{% url 'webuser:fuelbooking' dealer.id  %}">Book Fuel</a></p>
+        </div>
+    {% endfor %}

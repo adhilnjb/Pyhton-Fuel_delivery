@@ -1,0 +1,117 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Simple CSS for basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #tab {
+            margin: 20px auto;
+            width: 80%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <form method="post" id="locationform">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>District</td>
+                    <td>
+                        <select id="district" name="district">
+                            <option value="">Select</option>
+                            {% for i in dis %}
+                                <option value="{{ i.id }}">{{ i.district_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td>
+                        <select id="place" name="place">
+                            <option value="">Select</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td><input type="text" name="location"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="submit" value="Submit">
+                        <input type="reset" value="Cancel" name="cancel">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>SI. No</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in loc %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.place.district.district_name }}</td>
+                        <td>{{ i.place.place_name }}</td>
+                        <td>{{ i.location_name }}</td>
+                        <td><a href="{% url 'Webadmin:DlteLocation' i.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Webadmin:Ajaxplace' %}";
+        $.ajax({
+            url: ur,
+            data: { disd: did },
+            success: function (data) {
+                $("#place").html(data);
+            },
+        });
+    });
+</script>
+</html>
+{% endblock content %}
